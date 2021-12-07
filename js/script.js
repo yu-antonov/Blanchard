@@ -497,17 +497,16 @@ document.addEventListener('DOMContentLoaded', function() {
         p.addEventListener('click', (q) => {
             const path = q.currentTarget.dataset.path
 
-            document.querySelectorAll('.popup__box').forEach(function(popupBox) {
-                popupBox.classList.remove('popup__box-active')
-            });
             document.querySelector(`[data-target="${path}"]`).classList.add('popup__box-active');
+
         });
     });
 
     document.querySelectorAll('.popup__btn').forEach(b => {
         b.addEventListener('click', () => {
-            popupBox.classList.remove('popup__box-active')
-        })
+            document.querySelectorAll('.popup__box').forEach(function(popupBox) {
+                popupBox.classList.remove('popup__box-active')
+            });
+        });
     })
-
 });
