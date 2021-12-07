@@ -671,15 +671,15 @@ input.search__input::-ms-input-placeholder {
 }
 
 .hero__slide--1 {
-    background-image: url(../img/hero/birmingham-museums-trust-MK_98NuC4-4-unsplash\ 2.jpg);
+    background-image: url(../img/hero/hero1.webp);
 }
 
 .hero__slide--2 {
-    background-image: url(../img/hero/birmingham-museums-trust-MK_98NuC4-4-unsplash\ 1.png);
+    background-image: url(../img/hero/hero2.webp);
 }
 
 .hero__slide--3 {
-    background-image: url(../img/hero/birmingham-museums-trust-MK_98NuC4-4-unsplash\ 3.png);
+    background-image: url(../img/hero/hero3.webp);
 }
 
 @keyframes background {
@@ -1042,6 +1042,80 @@ input.search__input::-ms-input-placeholder {
 
 
 /* -- Custom Slider End -- */
+
+.popup__box {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity .8s ease-in-out;
+}
+
+.popup__box-active {
+    display: block;
+    opacity: 1;
+}
+
+.popup__content {
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-text);
+    background-color: var(--color-white);
+}
+
+.popup__descr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    max-width: 430px;
+}
+
+.popup__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.popup__author {
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.popup__btn {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+.popup__span {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    width: 30px;
+    height: 2px;
+    background-color: var(--color-black);
+    transform: rotate(45deg);
+}
+
+.popup__span::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--color-black);
+    transform: rotate(90deg);
+}
 
 
 /* ----------------- Catalog ----------------- */
@@ -2616,6 +2690,20 @@ input.search__input::-ms-input-placeholder {
         position: static;
         max-width: 100%;
     }
+    .popup__content {
+        justify-content: space-between;
+        width: 90%;
+    }
+    .popup__img {
+        width: 350px;
+        height: auto;
+    }
+    .popup__descr {
+        max-width: 40%;
+    }
+    .popup__description {
+        font-size: 14px;
+    }
     /* -- Catalog -- */
     .catalog__header {
         justify-content: space-between;
@@ -2782,6 +2870,23 @@ input.search__input::-ms-input-placeholder {
 }
 
 @media (max-width: 767px) {
+    /* -- Gallery -- */
+    .popup__content {
+        flex-direction: column;
+        width: 60%;
+    }
+    .popup__img {
+        width: 100%;
+    }
+    .popup__descr {
+        margin-bottom: 10px;
+        max-width: 100%;
+    }
+    .popup__btn {
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
     /* -- Event -- */
     .events__list {
         justify-content: space-between;
@@ -2992,6 +3097,9 @@ input.search__input::-ms-input-placeholder {
     }
     .card__img {
         height: 367px;
+    }
+    .popup__content {
+        width: 90%;
     }
     /* -- Catalog -- */
     .catalog__container {
@@ -3268,7 +3376,7 @@ input.search__input::-ms-input-placeholder {
         width: 195px;
         height: 65px;
     }
-    - .projects__slide-img {
+    .projects__slide-img {
         width: 55%;
         height: 40%;
     }
@@ -3434,206 +3542,17 @@ input.search__input::-ms-input-placeholder {
     }
 }
 
-
-/*
-.popup {
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(2, 2, 2, 0.5);
-    top: 0;
-    left: 0;
-    z-index: 11111;
+.animate__popup {
+    -webkit-animation-name: popup;
+    animation-name: popup;
+    animation-duration: .5s;
 }
 
-.popup_content {
-    display: flex;
-    height: 300px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10%;
-    background-color: red;
-}
-
-.popup_content_image {
-    width: 40%;
-    height: 100%;
-    background-color: chartreuse;
-}
-
-.popup_content_description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 60%;
-    height: 100%;
-    background-color: white;
-}
-
-.popup_active {
-    display: block;
-}
-*/
-
-.popup__box {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 999;
-}
-
-.popup__box-active {
-    display: block;
-}
-
-.popup__content {
-    display: flex;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--color-text);
-    background-color: var(--color-white);
-}
-
-.popup__descr {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 10px;
-    max-width: 430px;
-}
-
-.popup__title {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.popup__author {
-    margin-bottom: 10px;
-    font-style: italic;
-}
-
-.popup__btn {
-    position: relative;
-    display: block;
-    width: 50px;
-    height: 50px;
-}
-
-.popup__span {
-    position: absolute;
-    top: 15px;
-    left: 10px;
-    width: 30px;
-    height: 2px;
-    background-color: var(--color-black);
-    transform: rotate(45deg);
-}
-
-.popup__span::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 30px;
-    height: 2px;
-    background-color: var(--color-black);
-    transform: rotate(90deg);
-}
-
-
-/* Bouncing entrances  */
-
-@-webkit-keyframes bounceIn {
-    from,
-    20%,
-    40%,
-    60%,
-    80%,
-    to {
-        -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
+@keyframes popup {
     0% {
         opacity: 0;
-        -webkit-transform: scale3d(0.3, 0.3, 0.3);
-        transform: scale3d(0.3, 0.3, 0.3);
     }
-    20% {
-        -webkit-transform: scale3d(1.1, 1.1, 1.1);
-        transform: scale3d(1.1, 1.1, 1.1);
-    }
-    40% {
-        -webkit-transform: scale3d(0.9, 0.9, 0.9);
-        transform: scale3d(0.9, 0.9, 0.9);
-    }
-    60% {
+    100% {
         opacity: 1;
-        -webkit-transform: scale3d(1.03, 1.03, 1.03);
-        transform: scale3d(1.03, 1.03, 1.03);
     }
-    80% {
-        -webkit-transform: scale3d(0.97, 0.97, 0.97);
-        transform: scale3d(0.97, 0.97, 0.97);
-    }
-    to {
-        opacity: 1;
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
-}
-
-@keyframes bounceIn {
-    from,
-    20%,
-    40%,
-    60%,
-    80%,
-    to {
-        -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    0% {
-        opacity: 0;
-        -webkit-transform: scale3d(0.3, 0.3, 0.3);
-        transform: scale3d(0.3, 0.3, 0.3);
-    }
-    20% {
-        -webkit-transform: scale3d(1.1, 1.1, 1.1);
-        transform: scale3d(1.1, 1.1, 1.1);
-    }
-    40% {
-        -webkit-transform: scale3d(0.9, 0.9, 0.9);
-        transform: scale3d(0.9, 0.9, 0.9);
-    }
-    60% {
-        opacity: 1;
-        -webkit-transform: scale3d(1.03, 1.03, 1.03);
-        transform: scale3d(1.03, 1.03, 1.03);
-    }
-    80% {
-        -webkit-transform: scale3d(0.97, 0.97, 0.97);
-        transform: scale3d(0.97, 0.97, 0.97);
-    }
-    to {
-        opacity: 1;
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
-}
-
-.animate__bounceIn {
-    -webkit-animation-duration: calc(1s * 0.75);
-    animation-duration: calc(1s * 0.75);
-    -webkit-animation-duration: calc(var(--animate-duration) * 0.75);
-    animation-duration: calc(var(--animate-duration) * 0.75);
-    -webkit-animation-name: bounceIn;
-    animation-name: bounceIn;
 }
