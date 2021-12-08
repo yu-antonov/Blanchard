@@ -3204,7 +3204,7 @@ input.search-input::-ms-input-placeholder {
     }
     /* -- Event -- */
     .events__container {
-        padding-bottom: 47px;
+        padding-bottom: 65px;
     }
     .events__wrapper {
         margin: 0 auto;
@@ -3444,7 +3444,7 @@ input.search-input::-ms-input-placeholder {
     .feedback-block__input>label {
         margin-bottom: 15px;
     }
-    .feedback__btn {
+    .feedback-block__btn {
         padding: 10px 33.5px;
         font-size: 12px;
         font-weight: 700;
