@@ -73,11 +73,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     rows: 1,
                 },
             },
-            480: {
-                slidesPerView: 1,
-                spaceBetween: 10,
+            481: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+                spaceBetween: 20,
                 grid: {
-                    rows: 1,
+                    rows: 2,
                 },
             },
             768: {
