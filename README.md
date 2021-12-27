@@ -1,5 +1,5 @@
-<h1 align="center">Course Project: Blanchard</h1>
-<p>The course project is the layout of the Blanchcard website project. The layout is presented in Figma.</p>
+<h1 align="center">Blanchard</h1>
+<p>The project is the layout of the Blanchcard website project. The layout is presented in Figma.</p>
 <p>The project was made adaptive to mobile devices, tablets and desktop devices.</p>
 <h3 align="center">Desktop</h3>
 <p align="center"><img src="img/screen/Header Hero.png"></p>
