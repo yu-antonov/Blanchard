@@ -159,7 +159,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.querySelectorAll('.accordion__btn').forEach(function(accordionBtn) {
         accordionBtn.addEventListener('click', function(event) {
-            const path = event.currentTarget.dataset.path
+            document.querySelectorAll('.accordion__btn').forEach(function(tabsBtnAccActive) {
+                tabsBtnAccActive.classList.remove('selected')
+            })
+            this.classList.add('selected');
+            const path = event.currentTarget.dataset.path;
+
             document.querySelectorAll('.painter__descr').forEach(function(painterContent) {
                 painterContent.classList.remove('painter-active')
             });
@@ -430,10 +435,76 @@ document.addEventListener('DOMContentLoaded', function() {
                     function init() {
                         var myMap = new ymaps.Map("map", {
                             center: [55.760221, 37.618561],
-                            zoom: 13
+                            zoom: 13,
+                            controls: []
                         });
                         var myPlacemark = new ymaps.Placemark([55.758468, 37.601088], { balloonContentHeader: "Шоурум №4", balloonContentBody: "Леонтьевский переулок, дом 5/1", }, { iconLayout: 'default#image', iconImageHref: 'img/icon/map.svg', iconImageSize: [20, 20], iconImageOffset: [-3, -12] });
-                        myMap.geoObjects.add(myPlacemark)
+                        myMap.geoObjects.add(myPlacemark);
+                        // Создадим пользовательский макет ползунка масштаба.
+                        ZoomLayout = ymaps.templateLayoutFactory.createClass("<div>" +
+                                "<div id='zoom-in' class='btn'><i class='icon-plus'></i></div>" +
+                                "<div id='zoom-out' class='btn'><i class='icon-minus'></i></div>" +
+                                "</div>", {
+
+                                    // Переопределяем методы макета, чтобы выполнять дополнительные действия
+                                    // при построении и очистке макета.
+                                    build: function() {
+                                        // Вызываем родительский метод build.
+                                        ZoomLayout.superclass.build.call(this);
+
+                                        // Привязываем функции-обработчики к контексту и сохраняем ссылки
+                                        // на них, чтобы потом отписаться от событий.
+                                        this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
+                                        this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this);
+
+                                        // Начинаем слушать клики на кнопках макета.
+                                        $('#zoom-in').bind('click', this.zoomInCallback);
+                                        $('#zoom-out').bind('click', this.zoomOutCallback);
+                                    },
+
+                                    clear: function() {
+                                        // Снимаем обработчики кликов.
+                                        $('#zoom-in').unbind('click', this.zoomInCallback);
+                                        $('#zoom-out').unbind('click', this.zoomOutCallback);
+
+                                        // Вызываем родительский метод clear.
+                                        ZoomLayout.superclass.clear.call(this);
+                                    },
+
+                                    zoomIn: function() {
+                                        var map = this.getData().control.getMap();
+                                        map.setZoom(map.getZoom() + 1, { checkZoomRange: true });
+                                    },
+
+                                    zoomOut: function() {
+                                        var map = this.getData().control.getMap();
+                                        map.setZoom(map.getZoom() - 1, { checkZoomRange: true });
+                                    }
+                                }),
+                            zoomControl = new ymaps.control.ZoomControl({ options: { layout: ZoomLayout } });
+
+                        myMap.controls.add(zoomControl, {
+                            float: 'none',
+                            position: {
+                                right: 10,
+                                top: 275
+                            }
+                        });
+                        myMap.controls.add('geolocationControl', {
+                            float: 'none',
+                            position: {
+                                right: 10,
+                                top: 365
+                            },
+                            breakpoints: {
+                                480: {
+                                    position: {
+                                        right: 10,
+                                        top: 180
+                                    }
+                                }
+                            }
+                        });
                     }
                 };
             } else {
@@ -581,4 +652,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     mediaQueryMax480.addListener(handleTabletChangeMax480);
     handleTabletChangeMax480(mediaQueryMax480);
+
 })
