@@ -138,37 +138,72 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    $(function() {
+        $(".accordion").accordion({
+            heightStyle: "content",
+            collapsible: true,
+        })
+    });
     document.querySelectorAll('.tabs__btn').forEach(function(tabsBtn) {
+        //событие нажатия кнопки со страной
         tabsBtn.addEventListener('click', function(event) {
-            const path = event.currentTarget.dataset.path
+            //убираем класс активной кнопки у всех
+            document.querySelectorAll('.tabs__btn').forEach(function(delClass) {
+                delClass.classList.remove('tabs__btn-active')
+            });
+            //добавляем текущей кнопке активный класс
+            this.classList.add('tabs__btn-active')
+
+            const path = event.currentTarget.dataset.path;
+            //удаляем активный класс у всех секций с аккордионом и описанием
             document.querySelectorAll('.catalog__content').forEach(function(tabContent) {
                 tabContent.classList.remove('catalog__content-active')
             });
             document.querySelector(`[data-target="${path}"]`).classList.add('catalog__content-active');
-            document.querySelectorAll('.tabs__btn').forEach(function(delClass) {
-                delClass.classList.remove('tabs__btn-active')
+            //берем всех деятелей активной вкладки
+            let activeArtistAll = document.querySelector(`[data-target="${path}"]`).querySelectorAll('.accordion__item button');
+            //ищем одного активного деятеля
+            let activeArtist;
+            activeArtistAll.forEach(element => {
+                if (element.classList.contains('selected')) {
+                    activeArtist = element;
+                }
             });
-            this.classList.add('tabs__btn-active')
+            //Если нет активного деятеля
+            let firstArtist;
+            let dataFirstArtist;
+
+            if (!activeArtist) {
+                //делаем активным первого в списке
+                activeArtistAll = document.querySelector(`[data-target="${path}"]`).querySelector('.ui-accordion-content-active .accordion__item button');
+                activeArtistAll.classList.add('selected');
+                dataFirstArtist = document.querySelector(`[data-target="${path}"]`).querySelector('.painter__descr');
+                dataFirstArtist.classList.add('painter-active')
+
+            }
+            //Перезагружаем аккордион во вкладках
+            $(function() {
+                $(".accordion").accordion("refresh");
+            });
         })
     });
-    $(function() {
-        $(".accordion").accordion({
-            heightStyle: "content",
-            collapsible: !0,
-        })
-    });
+
     document.querySelectorAll('.accordion__btn').forEach(function(accordionBtn) {
-        accordionBtn.addEventListener('click', function(event) {
+        accordionBtn.addEventListener('click', function(eventArt) {
+            //удаляем класс актвиной кнопки у всех
             document.querySelectorAll('.accordion__btn').forEach(function(tabsBtnAccActive) {
                 tabsBtnAccActive.classList.remove('selected')
-            })
+            });
+            //добавляем активный класс текущей кнопке
             this.classList.add('selected');
-            const path = event.currentTarget.dataset.path;
-
+            //записываем в переменную атрибут
+            const pathArt = eventArt.currentTarget.dataset.path;
+            //удаляем класс активного контента
             document.querySelectorAll('.painter__descr').forEach(function(painterContent) {
                 painterContent.classList.remove('painter-active')
             });
-            document.querySelector(`[data-target="${path}"]`).classList.add('painter-active')
+            //добавляем активный класс текущему контенту
+            document.querySelector(`[data-target="${pathArt}"]`).classList.add('painter-active')
         })
     });
     const accordionButton = document.querySelectorAll('button.accordion__btn');
@@ -434,7 +469,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     function init() {
                         var myMap = new ymaps.Map("map", {
-                            center: [55.760221, 37.618561],
+                            center: [55.758468, 37.601088],
                             zoom: 13,
                             controls: []
                         });

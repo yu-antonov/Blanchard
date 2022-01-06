@@ -2001,12 +2001,15 @@ input[type="number"]:focus {
     display: inline-block;
     width: 16px;
     height: 16px;
+    outline: none;
     cursor: pointer;
 }
 
 .marker svg {
     position: absolute;
     top: 3px;
+    width: 100%;
+    height: 100%;
 }
 
 .marker:hover svg,
@@ -3363,10 +3366,13 @@ input[type="number"]:focus {
         top: 6px;
     }
     .ymaps-2-1-79-controls__control {
-        display: none !important;
+        inset: 125px 10px auto auto !important;
     }
     .ymaps-2-1-79-float-button {
         display: none !important;
+    }
+    .ymaps-2-1-79-events-pane {
+        pointer-events: none;
     }
 }
 
